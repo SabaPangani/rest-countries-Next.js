@@ -1,0 +1,22 @@
+.wrapper {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  padding: 5px 22px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 3px;
+  background: white;
+  border-radius: 10px;
+  margin: 100px 0;
+  cursor: pointer;
+  .back {
+    color: #111517;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+  }
+  .bi {
+    size: 30px;
+  }
+}

@@ -1,0 +1,43 @@
+.card {
+  max-width: 264px;
+  cursor: pointer;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  .name {
+    color: #111517;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 26px;
+    padding: 0 20px 0 20px;
+  }
+  .flag {
+    width: 287px;
+    height: 160px;
+    border-radius: 10px 10px 0 0;
+    flex-shrink: 0;
+  }
+
+  .desc {
+    display: flex;
+    flex-direction: column;
+    color: #111517;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px;
+    row-gap: 5px;
+    padding: 0 20px 30px 20px;
+    .info {
+      color: #111517;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 16px;
+    }
+  }
+}

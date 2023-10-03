@@ -1,6 +1,30 @@
 import classes from "./filter.module.scss";
-import { InputGroup, InputLeftElement, Input, Select } from "@chakra-ui/react";
-function Filter() {
+import { InputGroup, InputLeftElement, Input, Select,  } from "@chakra-ui/react";
+import { handler } from "@/pages/api/fetch-countries";
+function Filter(props) {
+  const submitHandler = async (e, type) => {
+    const inputValue = e.target.value.toLowerCase();
+
+    let countryData;
+
+    if (type === "select") {
+      console.log(inputValue);
+      countryData = await handler(
+        `https://restcountries.com/v3.1/region/${inputValue}`
+      );
+    } else if (type === "input") {
+      if (inputValue === "") {
+        countryData = await handler("https://restcountries.com/v3.1/all");
+      } else {
+        countryData = await handler(
+          `https://restcountries.com/v3.1/name/${inputValue}`
+        );
+      }
+    }
+
+    props.onUpdateCountries(countryData);
+  };
+
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
@@ -22,18 +46,39 @@ function Filter() {
                 />
               </svg>
             </InputLeftElement>
-            <Input width={480} background={'white'} type="tel" placeholder="Search for a country…" />
+            <Input
+              width={480}
+              background={"white"}
+              type="tel"
+              placeholder="Search for a country…"
+              onChange={(e) => {
+                submitHandler(e, "input");
+              }}
+            />
           </InputGroup>
         </div>
         <div>
-          <Select width={200} background={'white'} placeholder="Select option">
-            <option value="option1">Africa</option>
-            <option value="option2">America</option>
-            <option value="option3">Asia</option>
-            <option value="option3">Europe</option>
-            <option value="option3">Oceania</option>
+          <Select resetScope=".ck-reset"
+            onChange={(e) => {
+              submitHandler(e, "select");
+            }}
+            width={200}
+            background={"white"}
+            className={classes.select}
+            defaultValue=""
+
+          >
+            <option value="" disabled hidden>
+              Filter by Region
+            </option>
+            <option value="Africa">Africa</option>
+            <option value="America">America</option>
+            <option value="Asia">Asia</option>
+            <option value="Europe">Europe</option>
+            <option value="Oceania">Oceania</option>
           </Select>
         </div>
+        <button type="submit" style={{ display: "none" }}></button>
       </div>
     </div>
   );

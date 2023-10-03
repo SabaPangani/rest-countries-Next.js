@@ -1,12 +1,19 @@
-.container{
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 50px auto;
+  .wrapper {
     width: 100%;
-    max-width: 1440px;
-    margin: 50px auto;
-    .wrapper{
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    .select option {
+      background-color: #f0f0f0 !important;
+      color: #333 !important;
+      font-size: 16px !important;
+      padding: 5px 10px !important;
     }
+  }
 }

@@ -1,9 +1,15 @@
 import classes from "./header.module.scss";
+import { useRouter } from "next/router";
 function Header() {
+  const router = useRouter();
+
+  function showDetailsHandler() {
+    router.push("/");
+  }
   return (
     <header className={classes.header}>
       <div className={classes.container}>
-        <h1>Where in the world?</h1>
+        <h1 onClick={showDetailsHandler}>Where in the world?</h1>
         <div className={classes.theme}>
           <svg
             width="18"

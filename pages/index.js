@@ -1,31 +1,36 @@
-import CountriesList from "@/components/Countries/countries-list";
-import Filter from "../components/Filter/filter";
+import { handler } from "./api/fetch-countries";
+import { useState } from "react";
+import dynamic from "next/dynamic";
+const LazyFilter = dynamic(() => import("../components/Filter/filter"));
+
+const LazyCountriesList = dynamic(() =>
+  import("../components/Countries/countries-list")
+);
 function HomePage(props) {
+  const [countries, setCountries] = useState(props.countries);
+  const updateCountriesHandler = (countries) => {
+    setCountries(countries);
+  };
+
   return (
     <>
-      <Filter />
-      <CountriesList countries={props.countries} />
+      <LazyFilter onUpdateCountries={updateCountriesHandler} />
+      <LazyCountriesList countries={countries} />
     </>
   );
 }
 
 export async function getStaticProps() {
   try {
-    const response = await fetch("https://restcountries.com/v3.1/all");
+    const countries = await handler("https://restcountries.com/v3.1/all");
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch data");
-    }
-
-    const data = await response.json();
-    console.log(data);
     return {
       props: {
-        countries: data,
+        countries: countries,
       },
     };
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Error fetching data:", error.message);
 
     return {
       props: {

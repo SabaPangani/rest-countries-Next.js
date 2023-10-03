@@ -11,6 +11,10 @@
     align-items: center;
     margin: 0 auto;
     height: 80px;
+
+    h1{
+      cursor: pointer;
+    }
     .theme {
       display: flex;
       flex-direction: row;

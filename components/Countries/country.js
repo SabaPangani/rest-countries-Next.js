@@ -13,7 +13,6 @@ function country(props) {
         <Image
           className={classes.flag}
           src={props.img}
-          alt={props.alt}
         />
         <Stack mt="6" spacing="3">
           <Heading className={classes.name} size="md">

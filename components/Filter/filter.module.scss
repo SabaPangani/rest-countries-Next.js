@@ -8,7 +8,35 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    row-gap: 15px;
 
+    .group1 {
+      width: 480px;
+      .search {
+        width: 100%;
+        max-width: 480px;
+        &::placeholder {
+          font-size: 14px;
+        }
+        .select {
+          @media (max-width: 524px) {
+            &::placeholder {
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+    .group1,
+    .group2 {
+      padding: 0 20px;
+    }
+    .select {
+      @media (max-width: 524px) {
+        font-size: 14px;
+      }
+    }
     .select option {
       background-color: #f0f0f0 !important;
       color: #333 !important;

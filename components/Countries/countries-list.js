@@ -25,6 +25,9 @@ function CountriesList({ countries }) {
             region={countries.region}
           />
         )}
+        {countries.length <= 0 && (
+          <p>No country found...</p>
+        )}
       </ul>
     </div>
   );

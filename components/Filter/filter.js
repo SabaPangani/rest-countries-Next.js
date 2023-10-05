@@ -1,6 +1,6 @@
 import classes from "./filter.module.scss";
-import { InputGroup, InputLeftElement, Input, Select,  } from "@chakra-ui/react";
-import { handler } from "@/pages/api/fetch-countries";
+import { InputGroup, InputLeftElement, Input, Select } from "@chakra-ui/react";
+
 function Filter(props) {
   const submitHandler = async (e, type) => {
     const inputValue = e.target.value.toLowerCase();
@@ -8,16 +8,15 @@ function Filter(props) {
     let countryData;
 
     if (type === "select") {
-      console.log(inputValue);
-      countryData = await handler(
-        `https://restcountries.com/v3.1/region/${inputValue}`
+      countryData = props.countries.filter(
+        (country) => country.region.toLowerCase() === inputValue
       );
     } else if (type === "input") {
       if (inputValue === "") {
-        countryData = await handler("https://restcountries.com/v3.1/all");
+        countryData = props.countries;
       } else {
-        countryData = await handler(
-          `https://restcountries.com/v3.1/name/${inputValue}`
+        countryData = props.countries.filter((country) =>
+          country.name.common.toLowerCase().includes(inputValue)
         );
       }
     }
@@ -28,7 +27,7 @@ function Filter(props) {
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
-        <div>
+        <div className={classes.group1}>
           <InputGroup>
             <InputLeftElement pointerEvents="none">
               <svg
@@ -47,18 +46,19 @@ function Filter(props) {
               </svg>
             </InputLeftElement>
             <Input
-              width={480}
               background={"white"}
               type="tel"
               placeholder="Search for a country…"
               onChange={(e) => {
                 submitHandler(e, "input");
               }}
+              className={classes.search}
             />
           </InputGroup>
         </div>
-        <div>
-          <Select resetScope=".ck-reset"
+        <div className={classes.group2}>
+          <Select
+            resetScope=".ck-reset"
             onChange={(e) => {
               submitHandler(e, "select");
             }}
@@ -66,7 +66,6 @@ function Filter(props) {
             background={"white"}
             className={classes.select}
             defaultValue=""
-
           >
             <option value="" disabled hidden>
               Filter by Region

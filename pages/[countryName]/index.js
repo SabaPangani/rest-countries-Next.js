@@ -1,15 +1,13 @@
-import { handler } from "../api/fetch-countries";
 import CountryDetail from "@/components/Countries/country-detail";
+import { fetchCountries } from "../fetch-countries/fetch-countries";
 function CountryDetails(props) {
-  return (
-    <CountryDetail country={props.country}/>
-  );
+  return <CountryDetail country={props.country} />;
 }
 
 export default CountryDetails;
 
 export async function getStaticPaths() {
-  const countries = await handler("https://restcountries.com/v3.1/all");
+  const countries = await fetchCountries("https://restcountries.com/v3.1/all");
 
   return {
     fallback: "blocking",
@@ -21,19 +19,11 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const countryName = context.params.countryName;
-  const countries = await handler("https://restcountries.com/v3.1/all");
-
-  const country = countries.find((country) => country.name.common === countryName);
-
-  if (!country) {
-    return {
-      notFound: true,
-    };
-  }
+  const country = await fetchCountries(`https://restcountries.com/v3.1/name/${countryName.toLowerCase()}`);
 
   return {
     props: {
-      country: country,
+      country: country[0],
     },
   };
 }

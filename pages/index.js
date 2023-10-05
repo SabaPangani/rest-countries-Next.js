@@ -1,4 +1,4 @@
-import { handler } from "./api/fetch-countries";
+import { fetchCountries } from "./fetch-countries/fetch-countries";
 import { useState } from "react";
 import dynamic from "next/dynamic";
 const LazyFilter = dynamic(() => import("../components/Filter/filter"));
@@ -11,10 +11,12 @@ function HomePage(props) {
   const updateCountriesHandler = (countries) => {
     setCountries(countries);
   };
-
   return (
     <>
-      <LazyFilter onUpdateCountries={updateCountriesHandler} />
+      <LazyFilter
+        onUpdateCountries={updateCountriesHandler}
+        countries={props.countries}
+      />
       <LazyCountriesList countries={countries} />
     </>
   );
@@ -22,7 +24,9 @@ function HomePage(props) {
 
 export async function getStaticProps() {
   try {
-    const countries = await handler("https://restcountries.com/v3.1/all");
+    const countries = await fetchCountries(
+      "https://restcountries.com/v3.1/all"
+    );
 
     return {
       props: {

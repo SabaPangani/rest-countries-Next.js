@@ -1,51 +1,80 @@
 .container {
   width: 100%;
   max-width: 1440px;
-  margin:0 auto;
+  margin: 0 auto;
+  padding: 0 20px;
   .wrapper {
     width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    column-gap: 50px;
+    @media (max-width: 662px) {
+      flex-direction: column;
+      row-gap: 20px;
+      align-items: start;
+    }
     img {
+      max-width: 100%;
       width: 559.715px;
-      height: 483.169px;
       border-radius: 10px;
+      @media (max-width: 662px) {
+        width: 499px;
+      }
     }
 
     .details {
       display: flex;
       flex-direction: column;
       row-gap: 35px;
+
       h1 {
         color: #111517;
         font-size: 32px;
         font-style: normal;
         font-weight: 800;
         line-height: normal;
+
+        @media (max-width: 1024px) {
+          font-size: 26px;
+        }
+        @media (max-width: 320px) {
+          width: 22px;
+        }
       }
 
       .description {
         display: flex;
-        flex-direction: row;
-        column-gap: 200px;
+        justify-content: space-between;
+
+        @media (max-width: 1024px) {
+          flex-direction: column;
+        }
         .group {
           display: flex;
           flex-direction: column;
+          width: 100%;
+          max-width: 500px;
+
           .main {
             color: #111517;
             font-size: 16px;
             font-style: normal;
             font-weight: 600;
             line-height: 32px;
-
+            @media (max-width: 1024px) {
+              font-size: 14px;
+            }
             .sub {
               color: #111517;
               font-size: 16px;
               font-style: normal;
               font-weight: 300;
               line-height: 32px;
+              @media (max-width: 1024px) {
+                font-size: 14px;
+              }
             }
           }
         }
@@ -58,6 +87,9 @@
         line-height: 24px;
         margin-right: 15px;
         margin-top: 40px;
+        @media (max-width: 320px) {
+          width: 16;
+        }
         .border {
           width: 96px;
           height: 28px;
@@ -69,7 +101,10 @@
           font-size: 17px;
           font-weight: 300;
           font-size: 13px;
-          &:first-child{
+          @media (max-width: 320px) {
+            width: 12px;
+          }
+          &:first-child {
             margin-left: 10px;
           }
         }

@@ -1,6 +1,7 @@
 import { Card, Image, CardBody, Stack, Heading } from "@chakra-ui/react";
 import classes from "./country.module.scss";
 import { useRouter } from "next/router";
+
 function country(props) {
   const router = useRouter();
 

@@ -1,5 +1,5 @@
 import CountryDetail from "@/components/Countries/country-detail";
-import { fetchCountries } from "../fetch-countries/fetch-countries";
+import fetchCountries from "../fetch-countries/fetch-countries";
 function CountryDetails(props) {
   return <CountryDetail country={props.country} />;
 }
@@ -19,7 +19,9 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const countryName = context.params.countryName;
-  const country = await fetchCountries(`https://restcountries.com/v3.1/name/${countryName.toLowerCase()}`);
+  const country = await fetchCountries(
+    `https://restcountries.com/v3.1/name/${countryName.toLowerCase()}`
+  );
 
   return {
     props: {

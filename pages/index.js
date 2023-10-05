@@ -1,4 +1,4 @@
-import { fetchCountries } from "./fetch-countries/fetch-countries";
+import fetchCountries from "./fetch-countries/fetch-countries";
 import { useState } from "react";
 import dynamic from "next/dynamic";
 const LazyFilter = dynamic(() => import("../components/Filter/filter"));

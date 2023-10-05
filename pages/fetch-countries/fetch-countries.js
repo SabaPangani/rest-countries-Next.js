@@ -1,4 +1,4 @@
-export async function fetchCountries(url) {
+async function fetchCountries(url) {
   try {
     const res = await fetch(url);
 
@@ -13,3 +13,4 @@ export async function fetchCountries(url) {
     throw error;
   }
 }
+export default fetchCountries;
